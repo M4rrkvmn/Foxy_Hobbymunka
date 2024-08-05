@@ -1,0 +1,15 @@
+{
+    "PickingApple": "Alma szedés...",
+    "PickingBanana": "Banán szedés...",
+    "FruitPicking": "Gyümölcs szedés",
+    "Sell":"Eladás",
+    "BananaSell":"Banán Eladás",
+    "BananaSellDescription": "Egy banán = 100 Ft",
+    "AppleSell":"Alma Eladás",
+    "AppleSellDescription": "Egy alma = 100 Ft",
+    "BananaPicking1":"~INPUT_CONTEXT~ a Banán leszedéséhez",
+    "ApplePicking1":"~INPUT_CONTEXT~ az Alma leszedéséhez",
+    "FruitSell":"~INPUT_CONTEXT~ a gyümölcs eladásához",
+    "DonthaveitBanana":"Nincs Banán nálad amit le tudnál tenni!",
+    "DonthaveitApple":"Nincs Alma nálad amit le tudnál tenni!"
+}

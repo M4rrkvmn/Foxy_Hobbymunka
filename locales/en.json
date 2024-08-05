@@ -1,0 +1,15 @@
+{
+    "PickingApple": "Apple Picking...",
+    "PickingBanana": "Bananan Picking...",
+    "FruitPicking": "Fruit Picking",
+    "Sell":"Sell",
+    "BananaSell":"Banana Sell",
+    "BananaSellDescription": "One Banana = 100$",
+    "AppleSell":"Apple Sell",
+    "AppleSellDescription": "One Apple = 100$",
+    "BananaPicking1":"~INPUT_CONTEXT~ to pick the Banana",
+    "ApplePicking1":"~INPUT_CONTEXT~ to pick the Apple",
+    "FruitSell":"~INPUT_CONTEXT~ to sell the fruit",
+    "DonthaveitBanana":"You don't have a Banana to put down!",
+    "DonthaveitApple":"You don't have an Apple to put down!"
+}
