@@ -1,4 +1,5 @@
 ESX = exports['es_extended']:getSharedObject()
+lib.locale()
 
 lib.callback.register('Foxy_Hobbymunka:server:LogApple', function (source,xPlayer)
     local xPlayer = ESX.GetPlayerFromId(source)
@@ -105,30 +106,29 @@ AddEventHandler('Foxy_Hobbymunka:Bananagiveitem', function (source,xPlayer)
     xPlayer.AddInventoryItem(Config.Fruit.Banana, Config.Fruit.number1)
 end)
 
-lib.registerContext({
-    id = 'Foxy_Sell',
-    title = locale('Sell'),
-    options = {
-        title = locale('BananaSell'),
-        description = locale('BananaSellDescription'),
-        icon = '',
-        onselect = function ()
-            local xPlayer = ESX.GetPlayerFromId(source)
-            if xPlayer.hasItem('apple') >= 1 then
+RegisterNetEvent('Foxy_Hobbymunka:BananaSell')
+AddEventHandler('Foxy_Hobbymunka:BananaSell', function (xPlayer,source)
+    local xPlayer = ESX.GetPlayerFromId(source)
+
+    if not xPlayer then
+        return
+    end
+        if xPlayer.hasItem('apple') >= 1 then
             TriggerServerEvent('Foxy_Hobbymunka:Cashgiveitem')
            TriggerServerEvent('Foxy_Hobbymunka:Appleremoveitem')
            lib.callback('Foxy_Hobbymunka:server:LogSellApple')
            else
             ESX.ShowNotification(locale('DontHaveitBanana'))
-            end
         end
-    },
-    {
-        title = locale('AppleSell'),
-        description = locale('AppleSellDescription'),
-        icon = '',
-        onselect = function ()
-            local xPlayer = ESX.GetPlayerFromId(source)
+end)
+
+RegisterNetEvent('Foxy_Hobbymunka:AppleSell')
+AddEventHandler('Foxy_Hobbymunka:AppleSell', function (source,xPlayer)
+    local xPlayer = ESX.GetPlayerFromId(source)
+
+    if not xPlayer then
+        return        
+    end
             if xPlayer.hasItem('banana') >= 1 then
             TriggerServerEvent('Foxy_Hobbymunka:Cashgiveitem')
             TriggerServerEvent('Foxy_Hobbymunka:Bananaremoveitem')
@@ -136,130 +136,4 @@ lib.registerContext({
             else
                 ESX.ShowNotification(locale('DontHaveitApple'))
             end
-        end
-    }
-})
-
-CreateThread(function ()
-    local hash = GetHashKey(Config.NPC.ped)
-    ped = CreatePed(4, hash , Config.NPC.location , Config.NPC.headling ,false ,true)
-    SetEntityAsMissionEntity(ped, true, true)
-    SetBlockingOfNonTemporaryEvents(ped, true)
-    SetEntityInvincible(ped, true)
-    FreezeEntityPosition(ped, true)
-if Config.ox_target == true then
-    exports.ox_target:addSphereZone({
-        coords = Config.NPC.location,
-        radius = 1.5,
-        debug = Config.Debug,
-        drawSprite = false,
-        options = {
-            label = locale('Sell'),
-            icon = 'fa-duotone fa-solid fa-basket-shopping',
-            onselect = function ()
-                lib.showContext('Foxy_Sell')
-            end
-        }
-    })
-    exports.ox_target:addSphereZone({
-        coords = 0,0,0,
-        radius = 1.5,
-        debug = Config.Debug,
-        drawSprite = false,
-        options = {
-            label = locale('FruitPicking'),
-            icon = 'fa-solid fa-banana',
-            onselect = function ()
-                lib.progressBar({
-                    duration = Config.Time.Time,
-                    label = locale('FruitPicking'),
-                    useWhileDead = false,
-                    canCancel = false,
-                    disable = {
-                        move = true,
-                    },
-                }) 
-                lib.callback('Foxy_Hobbymunka:server:Logbanana')
-                TriggerServerEvent('Foxy_Hobbymunka:Bananagiveitem')
-            end
-        }
-    })
-    exports.ox_target:addSphereZone({
-        coords = 0,0,0,
-        radius = 1.5,
-        debug = Config.Debug,
-        drawSprite = false,
-        options = {
-            label = locale('FruitPicking'),
-            icon = 'fa-solid fa-apple-whole',
-            onselect = function ()
-                lib.progressBar({
-                    duration = Config.Time.Time,
-                    label = locale('FruitPicking'),
-                    useWhileDead = false,
-                    canCancel = false,
-                    disable = {
-                        move = true,
-                    },
-                }) 
-                lib.callback('Foxy_Hobbymunka:server:LogApple')
-                TriggerServerEvent('Foxy_Hobbymunka:Applegiveitem')
-            end
-        }
-    })
-    else
-local zone = lib.zones.sphere({
-    coords = Config.NPC.location,
-    radius = 1.5,
-    debug = Config.Debug,
-    inside = function ()
-        ESX.ShowHelpNotification(locale('FruitSell'))
-        if IsControlJustReleased(0,Config.Gomb) then
-            lib.showContext('Foxy_Sell')
-        end
-    end
-})
-local zone1 = lib.zones.sphere({
-    coords = 0,0,0,
-    radius = 1.5,
-    debug = Config.Debug,
-    inside = function ()
-        ESX.ShowHelpNotification(locale('BananaPicking1'))
-        if IsControlJustReleased(0, Config.Gomb) then
-            lib.progressBar({
-                duration = Config.Time.Time,
-                label = locale('FruitPicking'),
-                useWhileDead = false,
-                canCancel = false,
-                disable = {
-                    move = true,
-                },
-            }) 
-            lib.callback('Foxy_Hobbymunka:server:Logbanana')
-            TriggerServerEvent('Foxy_Hobbymunka:Bananagiveitem')
-        end
-    end
-})
-local zone2 lib.zones.sphere({
-    coords = 0,0,0,
-    radius = 1.5,
-    debug = Config.Debug,
-    inside = function ()
-        ESX.ShowHelpNotification(locale('ApplePicking1'))
-        if IsControlJustReleased(0, Config.Gomb) then
-            lib.progressBar({
-                duration = Config.Time.Time,
-                label = locale('FruitPicking'),
-                useWhileDead = false,
-                canCancel = false,
-                disable = {
-                    move = true,
-                },
-            }) 
-            lib.callback('Foxy_Hobbymunka:server:LogApple')
-            TriggerServerEvent('Foxy_Hobbymunka:Applegiveitem')
-        end
-    end
-})
-end
 end)

@@ -1,23 +1,24 @@
 fx_version 'cerulean'
 game 'gta5'
 author 'M4rrk'
+description'Hobbywork'
 lua54 'yes'
 
 client_script {
-    'client/main.lua'
+    'client/*.lua'
 }
 
 server_script {
-    'server/main.lua'
+    'server/*.lua'
 }
 
 shared_script {
-    'shared/config.lua',
+    'shared/*.lua',
     '@ox_lib/init.lua',
     '@es_extended/imports.lua'
 }
 
-files = {
+files {
     'locales/*.json'
 }
 
