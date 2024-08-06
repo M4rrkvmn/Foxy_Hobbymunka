@@ -11,5 +11,7 @@
     "ApplePicking1":"~INPUT_CONTEXT~ az Alma leszedéséhez",
     "FruitSell":"~INPUT_CONTEXT~ a gyümölcs eladásához",
     "DonthaveitBanana":"Nincs Banán nálad amit le tudnál tenni!",
-    "DonthaveitApple":"Nincs Alma nálad amit le tudnál tenni!"
+    "DonthaveitApple":"Nincs Alma nálad amit le tudnál tenni!",
+    "Apple":"Almát",
+    "Banan":"Banánt"
 }

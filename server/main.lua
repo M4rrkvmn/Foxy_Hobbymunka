@@ -1,8 +1,8 @@
 ESX = exports['es_extended']:getSharedObject()
 
 lib.callback.register('Foxy_Hobbymunka:server:LogApple', function (source,xPlayer)
-    local xPlayer = ESX.GetPlayerFromId
-    local Reward1 = 'almát'
+    local xPlayer = ESX.GetPlayerFromId(source)
+    local Reward1 = locale('Apple')
 
     if not xPlayer then
         return
@@ -12,14 +12,34 @@ lib.callback.register('Foxy_Hobbymunka:server:LogApple', function (source,xPlaye
 end)
 
 lib.callback.register('Foxy_Hobbymunka:server:Logbanana', function (source,xPlayer)
-    local xPlayer = ESX.GetPlayerFromId
-    local Reward2 = 'banánt'
+    local xPlayer = ESX.GetPlayerFromId(source)
+    local Reward2 = locale('Banan')
 
     if not xPlayer then
         return
     end
 
     logToDiscord(xPlayer.name ..'Leszedett egy', Reward2) 
+end)
+
+lib.callback.register('Foxy_Hobbymunka:server:LogSellApple', function (source,xPlayer)
+    local xPlayer = ESX.GetPlayerFromId(source)
+
+    if not xPlayer then
+        return
+    end
+
+    logToDiscord(xPlayer.name ..'Eladót egy', Reward1)    
+end)
+
+lib.callback.register('Foxy_Hobbymunka:server:LogSellBanana', function (source,xPlayer)
+    local xPlayer = ESX.GetPlayerFromId(source)
+
+    if not xPlayer then
+        return
+    end
+
+    logToDiscord(xPlayer.name ..'Eladót egy', Reward2)
 end)
 
 AddEventHandler('onResourceStop', function(resource)
@@ -97,6 +117,7 @@ lib.registerContext({
             if xPlayer.hasItem('apple') >= 1 then
             TriggerServerEvent('Foxy_Hobbymunka:Cashgiveitem')
            TriggerServerEvent('Foxy_Hobbymunka:Appleremoveitem')
+           lib.callback('Foxy_Hobbymunka:server:LogSellApple')
            else
             ESX.ShowNotification(locale('DontHaveitBanana'))
             end
@@ -111,6 +132,7 @@ lib.registerContext({
             if xPlayer.hasItem('banana') >= 1 then
             TriggerServerEvent('Foxy_Hobbymunka:Cashgiveitem')
             TriggerServerEvent('Foxy_Hobbymunka:Bananaremoveitem')
+            lib.callback('Foxy_Hobbymunka:server:LogSellBanana')
             else
                 ESX.ShowNotification(locale('DontHaveitApple'))
             end
@@ -125,7 +147,7 @@ CreateThread(function ()
     SetBlockingOfNonTemporaryEvents(ped, true)
     SetEntityInvincible(ped, true)
     FreezeEntityPosition(ped, true)
-if Config.ox_target == "true" then
+if Config.ox_target == true then
     exports.ox_target:addSphereZone({
         coords = Config.NPC.location,
         radius = 1.5,
@@ -146,9 +168,8 @@ if Config.ox_target == "true" then
         drawSprite = false,
         options = {
             label = locale('FruitPicking'),
-            icon = 'fa-solid fa-apple-whole',
+            icon = 'fa-solid fa-banana',
             onselect = function ()
-                TriggerServerEvent('Foxy_Hobbymunka:Bananagiveitem')
                 lib.progressBar({
                     duration = Config.Time.Time,
                     label = locale('FruitPicking'),
@@ -158,6 +179,8 @@ if Config.ox_target == "true" then
                         move = true,
                     },
                 }) 
+                lib.callback('Foxy_Hobbymunka:server:Logbanana')
+                TriggerServerEvent('Foxy_Hobbymunka:Bananagiveitem')
             end
         }
     })
@@ -168,9 +191,8 @@ if Config.ox_target == "true" then
         drawSprite = false,
         options = {
             label = locale('FruitPicking'),
-            icon = 'fa-solid fa-banana',
+            icon = 'fa-solid fa-apple-whole',
             onselect = function ()
-                TriggerServerEvent('Foxy_Hobbymunka:Applegiveitem')
                 lib.progressBar({
                     duration = Config.Time.Time,
                     label = locale('FruitPicking'),
@@ -180,6 +202,8 @@ if Config.ox_target == "true" then
                         move = true,
                     },
                 }) 
+                lib.callback('Foxy_Hobbymunka:server:LogApple')
+                TriggerServerEvent('Foxy_Hobbymunka:Applegiveitem')
             end
         }
     })
@@ -201,8 +225,17 @@ local zone1 = lib.zones.sphere({
     debug = Config.Debug,
     inside = function ()
         ESX.ShowHelpNotification(locale('BananaPicking1'))
-        lib.callback('Foxy_Hobbymunka:server:Logbanana')
         if IsControlJustReleased(0, Config.Gomb) then
+            lib.progressBar({
+                duration = Config.Time.Time,
+                label = locale('FruitPicking'),
+                useWhileDead = false,
+                canCancel = false,
+                disable = {
+                    move = true,
+                },
+            }) 
+            lib.callback('Foxy_Hobbymunka:server:Logbanana')
             TriggerServerEvent('Foxy_Hobbymunka:Bananagiveitem')
         end
     end
@@ -213,8 +246,17 @@ local zone2 lib.zones.sphere({
     debug = Config.Debug,
     inside = function ()
         ESX.ShowHelpNotification(locale('ApplePicking1'))
-        lib.callback('Foxy_Hobbymunka:server:LogApple')
         if IsControlJustReleased(0, Config.Gomb) then
+            lib.progressBar({
+                duration = Config.Time.Time,
+                label = locale('FruitPicking'),
+                useWhileDead = false,
+                canCancel = false,
+                disable = {
+                    move = true,
+                },
+            }) 
+            lib.callback('Foxy_Hobbymunka:server:LogApple')
             TriggerServerEvent('Foxy_Hobbymunka:Applegiveitem')
         end
     end

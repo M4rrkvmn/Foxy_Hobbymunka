@@ -2,7 +2,7 @@ Config = {}
 
 Config.locale = 'hu'
 Config.Debug = false
-Config.ox_target = "true"
+Config.ox_target = false
 Config.Gomb = 38 --https://docs.fivem.net/docs/game-references/controls/ itt tudod ki keresni ha nem E betün szeretetnéd az interakciót
 
 Config.NPC = {
