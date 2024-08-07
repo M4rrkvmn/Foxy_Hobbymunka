@@ -110,30 +110,28 @@ RegisterNetEvent('Foxy_Hobbymunka:BananaSell')
 AddEventHandler('Foxy_Hobbymunka:BananaSell', function (xPlayer,source)
     local xPlayer = ESX.GetPlayerFromId(source)
 
+
     if not xPlayer then
         return
     end
-        if xPlayer.hasItem('apple') >= 1 then
+    if xPlayer.hasItem('apple') >= 1 then
             TriggerServerEvent('Foxy_Hobbymunka:Cashgiveitem')
-           TriggerServerEvent('Foxy_Hobbymunka:Appleremoveitem')
-           lib.callback('Foxy_Hobbymunka:server:LogSellApple')
-           else
+            TriggerServerEvent('Foxy_Hobbymunka:Appleremoveitem')
+            lib.callback('Foxy_Hobbymunka:server:LogSellApple')
+        else
             ESX.ShowNotification(locale('DontHaveitBanana'))
-        end
+    end
 end)
 
 RegisterNetEvent('Foxy_Hobbymunka:AppleSell')
 AddEventHandler('Foxy_Hobbymunka:AppleSell', function (source,xPlayer)
     local xPlayer = ESX.GetPlayerFromId(source)
 
-    if not xPlayer then
-        return        
-    end
-            if xPlayer.hasItem('banana') >= 1 then
+    if xPlayer.hasItem('banana') >= 1 then
             TriggerServerEvent('Foxy_Hobbymunka:Cashgiveitem')
             TriggerServerEvent('Foxy_Hobbymunka:Bananaremoveitem')
             lib.callback('Foxy_Hobbymunka:server:LogSellBanana')
-            else
+        else
                 ESX.ShowNotification(locale('DontHaveitApple'))
-            end
+        end
 end)

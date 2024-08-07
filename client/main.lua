@@ -7,7 +7,7 @@ lib.registerContext({
     options = {
         title = locale('BananaSell'),
         description = locale('BananaSellDescription'),
-        icon = '',
+        icon =  'fa-sharp fa-solid fa-basket-shopping-simple',
         onselect = function ()
             TriggerServerEvent('Foxy_Hobbymunka:BananaSell')
         end
@@ -15,7 +15,7 @@ lib.registerContext({
     {
         title = locale('AppleSell'),
         description = locale('AppleSellDescription'),
-        icon = '',
+        icon = 'fa-sharp fa-solid fa-basket-shopping-simple',
         onselect = function ()
             TriggerServerEvent('Foxy_Hobbymunka:AppleSell')
         end
@@ -32,7 +32,7 @@ CreateThread(function ()
     
 if Config.ox_target == true then
     exports.ox_target:addSphereZone({
-        coords = Config.NPC.location,
+        coords = Config.TargetCoords.coords1,
         radius = 1.5,
         debug = Config.Debug,
         drawSprite = false,
@@ -45,7 +45,7 @@ if Config.ox_target == true then
         }
     })
     exports.ox_target:addSphereZone({
-        coords = 0,0,0,
+        coords = Config.TargetCoords.coords2,
         radius = 1.5,
         debug = Config.Debug,
         drawSprite = false,
@@ -68,7 +68,7 @@ if Config.ox_target == true then
         }
     })
     exports.ox_target:addSphereZone({
-        coords = 0,0,0,
+        coords = Config.TargetCoords.coords3,
         radius = 1.5,
         debug = Config.Debug,
         drawSprite = false,
@@ -92,7 +92,7 @@ if Config.ox_target == true then
     })
     else
 local zone = lib.zones.sphere({
-    coords = Config.NPC.location,
+    coords = Config.TargetCoords.coords1,
     radius = 1.5,
     debug = Config.Debug,
     inside = function ()
@@ -103,7 +103,7 @@ local zone = lib.zones.sphere({
     end
 })
 local zone1 = lib.zones.sphere({
-    coords = 0,0,0,
+    coords = Config.TargetCoords.coords2,
     radius = 1.5,
     debug = Config.Debug,
     inside = function ()
@@ -124,7 +124,7 @@ local zone1 = lib.zones.sphere({
     end
 })
 local zone2 lib.zones.sphere({
-    coords = 0,0,0,
+    coords = Config.TargetCoords.coords3,
     radius = 1.5,
     debug = Config.Debug,
     inside = function ()

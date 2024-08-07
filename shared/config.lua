@@ -7,8 +7,14 @@ Config.Gomb = 38 --https://docs.fivem.net/docs/game-references/controls/ itt tud
 
 Config.NPC = {
     ped = '',
-    location = '',
+    location =  vector3(-553.6076, -189.4497, 38.2197 -1),
     headling = '',
+}
+
+Config.TargetCoords = {
+    coords1 = vector3(0,0,0),
+    coords2 = vector3(0,0,0),
+    coords3 = vector3(0,0,0),
 }
 
 Config.Reward = {
