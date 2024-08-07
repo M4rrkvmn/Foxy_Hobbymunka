@@ -6,9 +6,9 @@ Config.ox_target = false
 Config.Gomb = 38 --https://docs.fivem.net/docs/game-references/controls/ itt tudod ki keresni ha nem E betün szeretetnéd az interakciót
 
 Config.NPC = {
-    ped = '',
+    ped = 'cs_bankman',
     location =  vector3(-553.6076, -189.4497, 38.2197 -1),
-    headling = '',
+    headling = 200.000,
 }
 
 Config.TargetCoords = {
@@ -20,13 +20,13 @@ Config.TargetCoords = {
 Config.Reward = {
     cash = '100',
     item = 'money',
+    RewardFruitmin = '1',
+    RewardFruitmax = '5',
 }
 
 Config.Fruit = {
     Banana = 'banana',
-    number2 = '1',
     Apple = 'apple',
-    number1 = '1'
 }
 
 Config.Time = {

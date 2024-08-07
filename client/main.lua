@@ -19,9 +19,9 @@ lib.registerContext({
         onselect = function ()
             TriggerServerEvent('Foxy_Hobbymunka:AppleSell')
         end
-    }
+    },
 })
-
+    
 CreateThread(function ()
     local hash = GetHashKey(Config.NPC.ped)
     ped = CreatePed(4, hash , Config.NPC.location , Config.NPC.headling ,false ,true)

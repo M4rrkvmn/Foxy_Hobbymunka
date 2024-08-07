@@ -70,7 +70,7 @@ AddEventHandler('Foxy_Hobbymunka:Appleremoveitem', function (source,xPlayer)
         return
     end
 
-    xPlayer.removeInventoryItem(Config.Fruit.Apple, Config.Fruit.number2)
+    xPlayer.removeInventoryItem(Config.Fruit.Apple, math.random(Config.Reward.RewardFruitmin, Config.Reward.RewardFruitmax))
 end)
 
 RegisterNetEvent('Foxy_Hobbymunka:Applegiveitem')
@@ -81,7 +81,7 @@ AddEventHandler('Foxy_Hobbymunka:Applegiveitem', function (source,xPlayer)
         return
     end
 
-    xPlayer.AddInventoryItem(Config.Fruit.Apple, Config.Fruit.number2)
+    xPlayer.AddInventoryItem(Config.Fruit.Apple, math.random(Config.Reward.RewardFruitmin, Config.Reward.RewardFruitmax))
 end)
 
 RegisterNetEvent('Foxy_Hobbymunka:Bananaremoveitem')
@@ -92,7 +92,7 @@ AddEventHandler('Foxy_Hobbymunka:Bananaremoveitem', function (source,xPlayer)
         return
     end
 
-    xPlayer.removeInventoryItem(Config.Fruit.Banana, Config.Fruit.number1)
+    xPlayer.removeInventoryItem(Config.Fruit.Banana, math.random(Config.Reward.RewardFruitmin, Config.Reward.RewardFruitmax))
 end)
 
 RegisterNetEvent('Foxy_Hobbymunka:Bananagiveitem')
@@ -103,7 +103,7 @@ AddEventHandler('Foxy_Hobbymunka:Bananagiveitem', function (source,xPlayer)
         return
     end
 
-    xPlayer.AddInventoryItem(Config.Fruit.Banana, Config.Fruit.number1)
+    xPlayer.AddInventoryItem(Config.Fruit.Banana, math.random(Config.Reward.RewardFruitmin, Config.Reward.RewardFruitmax))
 end)
 
 RegisterNetEvent('Foxy_Hobbymunka:BananaSell')
